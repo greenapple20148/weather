@@ -1,0 +1,7 @@
+{
+  "name": "smart-weather",
+  "description": "A premium weather application featuring real-time data, beautiful visualizations, and AI-powered personalized weather insights.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

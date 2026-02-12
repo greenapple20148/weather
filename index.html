@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RZeal Solutions LLC | Real-Time Weather Forecast & AI Insights</title>
+  <meta name="description" content="Get hyper-local weather intelligence with RZeal Solutions LLC. Featuring real-time forecasts, AI-powered insights, dynamic wind compass, and 7-day atmospheric delta tracking.">
+  <meta name="keywords" content="weather forecast, local weather, AI weather insights, real-time weather, wind direction compass, uv index, temperature tracker, hyper-local weather">
+  <meta name="author" content="RZeal Solutions LLC">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#3b82f6">
+  <link rel="canonical" href="https://rzealsolutions.com" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rzealsolutions.com">
+  <meta property="og:title" content="RZeal Solutions LLC | Hyper-Local Weather Intelligence">
+  <meta property="og:description" content="Advanced AI-powered weather forecasting with real-time local telemetry, dynamic compass, and 7-day atmospheric tracking.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&w=1200&h=630">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://rzealsolutions.com">
+  <meta property="twitter:title" content="RZeal Solutions LLC | Hyper-Local Weather Intelligence">
+  <meta property="twitter:description" content="Advanced AI-powered weather forecasting with real-time local telemetry, dynamic compass, and 7-day atmospheric tracking.">
+  <meta property="twitter:image" content="https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&w=1200&h=630">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            glass: {
+              light: 'rgba(255, 255, 255, 0.6)',
+              dark: 'rgba(15, 23, 42, 0.4)',
+              midnight: 'rgba(0, 0, 0, 0.6)'
+            }
+          },
+          backdropBlur: {
+            xs: '2px',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+      background-color: #000;
+      transition: background-color 1s cubic-bezier(0.4, 0, 0.2, 1), color 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, backdrop-filter;
+      transition-duration: 1000ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card {
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    .light .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.06);
+    }
+
+    .dark .glass-card {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .midnight .glass-card {
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .ai-glow {
+      position: relative;
+    }
+
+    .ai-glow::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(45deg, #3b82f6, #818cf8, #c084fc, #3b82f6);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: rotate-gradient 6s linear infinite;
+    }
+
+    @keyframes rotate-gradient {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      50% { transform: translateX(3px) rotate(3deg); }
+    }
+    .animate-sway {
+      animation: sway 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(0.96); }
+    }
+    .animate-pulse-soft {
+      animation: pulse-soft 3s ease-in-out infinite;
+    }
+
+    @keyframes bolt-flicker {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); filter: brightness(1.5); }
+    }
+
+    .animate-bolt {
+      animation: bolt-flicker 0.8s ease-in-out infinite;
+    }
+
+    @keyframes slow-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-slow-spin {
+      animation: slow-spin 12s linear infinite;
+    }
+
+    .light body { background-color: #f8fafc; }
+    .dark body { background-color: #0f172a; }
+    .midnight body { background-color: #000; }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "@google/genai": "https://esm.sh/@google/genai@1.40.0",
+    "recharts": "https://esm.sh/recharts@3.7.0?external=react,react-dom",
+    "@vercel/analytics/react": "https://esm.sh/@vercel/analytics@1.6.1/react?external=react",
+    "@vercel/analytics/": "https://esm.sh/@vercel/analytics@^1.6.1/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "three": "https://esm.sh/three@^0.182.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="min-h-screen">
+  <div class="grain"></div>
+  <div id="root"></div>
+  <script id="structured-data" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "RZeal Solutions LLC",
+      "url": "https://rzealsolutions.com",
+      "applicationCategory": "WeatherApplication",
+      "description": "Hyper-local weather forecasts with real-time AI-powered insights and 7-day atmospheric telemetry.",
+      "operatingSystem": "Web",
+      "featureList": [
+        "Real-time Weather Telemetry",
+        "AI Weather Analysis",
+        "Dynamic Wind Compass",
+        "7-Day Weather Forecast",
+        "24-Hour Atmospheric Delta"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
