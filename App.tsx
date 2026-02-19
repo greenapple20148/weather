@@ -575,21 +575,6 @@ const App = () => {
                 </div>
               </section>
 
-              <div className="ai-glow backdrop-blur-3xl rounded-[2.5rem] p-8 shadow-xl">
-                <h3 className="text-xs font-black uppercase tracking-widest mb-6 flex items-center gap-3">
-                  <i className="fa-solid fa-sparkles text-blue-500 animate-pulse"></i> Neural Atmospheric Insight
-                </h3>
-                {isAiLoading ? (
-                  <div className="space-y-3">
-                    <div className="h-3 w-full bg-blue-500/10 rounded animate-pulse"></div>
-                    <div className="h-3 w-2/3 bg-blue-500/10 rounded animate-pulse"></div>
-                  </div>
-                ) : (
-                  <p className="text-lg font-medium leading-relaxed italic opacity-90">{aiInsight}</p>
-                )}
-              </div>
-
-
             </section>
 
             <aside className="lg:col-span-4 h-full">
