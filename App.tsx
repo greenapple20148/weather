@@ -525,6 +525,35 @@ const App = () => {
                 </div>
               </article>
 
+              <section className="glass-card rounded-[2.5rem] p-8 shadow-2xl">
+                <div className="flex items-center justify-between mb-10">
+                  <h3 className="text-sm font-black uppercase tracking-[0.3em] opacity-40">7-Day Outlook</h3>
+                  <i className="fa-solid fa-satellite text-[10px] text-blue-500 animate-pulse"></i>
+                </div>
+                <div className="space-y-4">
+                  {weather.daily.time.map((day, idx) => {
+                    const dayDesc = getWeatherDescription(weather.daily.weatherCode[idx]);
+                    return (
+                      <div key={idx} className="flex items-center justify-between p-4 rounded-3xl hover:bg-white/5 transition-all group cursor-default">
+                        <div className="w-24">
+                          <p className="text-sm font-black">{idx === 0 ? 'Today' : new Date(day).toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                          <div className="flex items-center gap-2 opacity-40 mt-1">
+                            <span className="text-[9px] font-bold uppercase truncate tracking-tight">{dayDesc.text}</span>
+                          </div>
+                        </div>
+                        <div className="flex-1 flex justify-center">
+                          <i className={`fa-solid ${dayDesc.icon} text-2xl text-blue-500 transition-all duration-500 ${dayDesc.animate} group-hover:scale-125`}></i>
+                        </div>
+                        <div className="flex gap-4 min-w-[80px] justify-end">
+                          <span className="text-base font-black">{formatTemp(weather.daily.tempMax[idx])}°</span>
+                          <span className="text-base font-black opacity-30">{formatTemp(weather.daily.tempMin[idx])}°</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+
               <section className="glass-card rounded-[2.5rem] p-8 shadow-xl">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                   <h3 className="text-[10px] font-black uppercase tracking-widest opacity-40">Atmospheric Delta (Hourly)</h3>
@@ -578,37 +607,8 @@ const App = () => {
             </section>
 
             <aside className="lg:col-span-4 h-full">
-              <section className="glass-card rounded-[2.5rem] p-8 sticky top-6 shadow-2xl">
-                <div className="flex items-center justify-between mb-10">
-                  <h3 className="text-sm font-black uppercase tracking-[0.3em] opacity-40">7-Day Outlook</h3>
-                  <i className="fa-solid fa-satellite text-[10px] text-blue-500 animate-pulse"></i>
-                </div>
-                <div className="space-y-4">
-                  {weather.daily.time.map((day, idx) => {
-                    const dayDesc = getWeatherDescription(weather.daily.weatherCode[idx]);
-                    return (
-                      <div key={idx} className="flex items-center justify-between p-4 rounded-3xl hover:bg-white/5 transition-all group cursor-default">
-                        <div className="w-24">
-                          <p className="text-sm font-black">{idx === 0 ? 'Today' : new Date(day).toLocaleDateString('en-US', { weekday: 'short' })}</p>
-                          <div className="flex items-center gap-2 opacity-40 mt-1">
-                            <span className="text-[9px] font-bold uppercase truncate tracking-tight">{dayDesc.text}</span>
-                          </div>
-                        </div>
-                        <div className="flex-1 flex justify-center">
-                          <i className={`fa-solid ${dayDesc.icon} text-2xl text-blue-500 transition-all duration-500 ${dayDesc.animate} group-hover:scale-125`}></i>
-                        </div>
-                        <div className="flex gap-4 min-w-[80px] justify-end">
-                          <span className="text-base font-black">{formatTemp(weather.daily.tempMax[idx])}°</span>
-                          <span className="text-base font-black opacity-30">{formatTemp(weather.daily.tempMin[idx])}°</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-
               {/* Baby Sale Card */}
-              <section className="glass-card rounded-[2.5rem] p-8 mt-6 shadow-2xl border border-blue-400/20 bg-gradient-to-br from-blue-400/5 to-transparent">
+              <section className="glass-card rounded-[2.5rem] p-8 shadow-2xl border border-blue-400/20 bg-gradient-to-br from-blue-400/5 to-transparent">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-blue-400 flex items-center justify-center shadow-lg shadow-blue-400/20">
                     <i className="fa-solid fa-baby-carriage text-2xl text-white"></i>
@@ -633,11 +633,7 @@ const App = () => {
                   <i className="fa-solid fa-arrow-up-right-from-square transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
                 </a>
 
-                <div className="mt-6 flex items-center gap-2 opacity-30">
-                  <div className="h-[1px] flex-1 bg-blue-400/20"></div>
-                  <span className="text-[8px] font-black uppercase tracking-widest text-blue-400">Powered by Amazon</span>
-                  <div className="h-[1px] flex-1 bg-blue-400/20"></div>
-                </div>
+
               </section>
 
               {/* Trending Now / Wedding Registry Card */}
@@ -747,11 +743,7 @@ const App = () => {
                   <i className="fa-solid fa-arrow-up-right-from-square transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
                 </a>
 
-                <div className="mt-6 flex items-center gap-2 opacity-30">
-                  <div className="h-[1px] flex-1 bg-blue-400/20"></div>
-                  <span className="text-[8px] font-black uppercase tracking-widest text-blue-400">Powered by Amazon</span>
-                  <div className="h-[1px] flex-1 bg-blue-400/20"></div>
-                </div>
+
               </section>
             </aside>
           </main>
