@@ -160,23 +160,23 @@ const App = () => {
     setPreferredCountry(country);
     localStorage.setItem('preferredCountry', country);
     if (weather) {
-      updateAiInsight(weather, true);
-      updateActivityExplorer(weather);
+      // updateAiInsight(weather, true);
+      // updateActivityExplorer(weather);
     }
   };
 
-  const updateAiInsight = async (data: WeatherData, forceRefresh = false) => {
-    const cached = getCache(CACHE_KEY_INSIGHT);
-    if (!forceRefresh && cached && isCacheValid(cached.timestamp, WEATHER_TTL)) {
-      setAiInsight(cached.data);
-      return;
-    }
-    setIsAiLoading(true);
-    const insight = await getAIInsight(data);
-    setAiInsight(insight);
-    setCache(CACHE_KEY_INSIGHT, insight);
-    setIsAiLoading(false);
-  };
+  // const updateAiInsight = async (data: WeatherData, forceRefresh = false) => {
+  //   const cached = getCache(CACHE_KEY_INSIGHT);
+  //   if (!forceRefresh && cached && isCacheValid(cached.timestamp, WEATHER_TTL)) {
+  //     setAiInsight(cached.data);
+  //     return;
+  //   }
+  //   setIsAiLoading(true);
+  //   const insight = await getAIInsight(data);
+  //   setAiInsight(insight);
+  //   setCache(CACHE_KEY_INSIGHT, insight);
+  //   setIsAiLoading(false);
+  // };
 
   const updateActivityExplorer = async (data: WeatherData) => {
     const desc = getWeatherDescription(data.current.weatherCode).text;
@@ -222,7 +222,7 @@ const App = () => {
         setWeather(data);
         setLoading(false);
         updateAiInsight(data);
-        updateActivityExplorer(data);
+        // updateActivityExplorer(data);
         return;
       }
     }
@@ -233,8 +233,8 @@ const App = () => {
       const data = await fetchWeather(lat, lon, name, country);
       setWeather(data);
       setCache(CACHE_KEY_WEATHER, data);
-      updateAiInsight(data, true);
-      updateActivityExplorer(data);
+      // updateAiInsight(data, true);
+      // updateActivityExplorer(data);
     } catch (err) {
       setError('Telemetry link failed. Check connection.');
     } finally {
@@ -840,16 +840,6 @@ const App = () => {
                       <p className="mb-4">You should not rely on the information on this website as a substitute for professional advice tailored to your individual circumstances. Always consult a qualified professional before making financial decisions.</p>
                     </section>
 
-                    <section className="p-6 rounded-3xl bg-blue-500/5 border border-blue-500/10">
-                      <h4 className="font-black text-xs uppercase mb-2">AI-Generated Content Disclaimer</h4>
-                      <p className="mb-4">Some features of this website use artificial intelligence (AI) to generate insights, recommendations, or summaries based on user-provided information.</p>
-                      <ul className="space-y-2 list-disc pl-5 text-[11px] font-bold uppercase opacity-70">
-                        <li>AI-generated content may be inaccurate, incomplete, or outdated</li>
-                        <li>Outputs are provided “as is” and should be independently verified</li>
-                        <li>We do not guarantee the accuracy, reliability, or suitability of AI-generated results</li>
-                      </ul>
-                      <p className="mt-4">You are solely responsible for how you interpret and use any AI-generated content.</p>
-                    </section>
 
                     <section>
                       <h4 className="font-black text-xs uppercase mb-2">No Guarantees</h4>
